@@ -1,0 +1,16 @@
+15-Puzzle Solver
+
+Description:
+I wanted to practice some of the principles that I had learned from my Intro to Artificial Intelligence class. I have one of these puzzles and decided to create an AI to solve these for me.
+
+The rules of the puzzle can be found here:
+http://en.wikipedia.org/wiki/15_puzzle
+
+There are two tree searches I used for this project:
+A* (A-star)
+Beam Search
+
+Result:
+My implementation for A* works great on a 3x3 board, but seems to take an incredible amount of time for 4x4 boards. In fact, it would never finish. After comparing my own A* implementation for 15-puzzle with other suggestions online, I wasn’t able to find why my implementation is so slow (although many online forums I read suggested writing the code just as I had done).
+
+Because of A*’s incapability to solve a 4x4 board in reasonable time, I came across ‘Beam Search’ as a great alternative. My machine finds a reasonable solution (although not optimal) almost instantly and does not use up a lot of memory.

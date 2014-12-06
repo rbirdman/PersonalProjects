@@ -1,0 +1,2 @@
+Description:
+The title of the project is pretty self explanatory. This AI is able to guess phrases. The AI cheats and uses a dictionary to find possible words. After analyzing all the possible words, it chooses the letter that has the highest probability of being in any of the words.

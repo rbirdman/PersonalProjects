@@ -1,0 +1,6 @@
+Description:
+This was a topic in one of my classes that was really interesting to me. Obviously, it was so interesting that I actually created a program to implement the algorithm.
+
+The program reads an input file and generates a code map of the ‘optimal compression’ for the file. It reads the file one character/byte at a time, and generates a Huffman encoding for the file.
+
+This program is tricky in that it involves reading and writing bits to compress or decompress. At the time, I didn’t have the time to implement file reading and writing. So it simply generates the code map and prints it to the console.

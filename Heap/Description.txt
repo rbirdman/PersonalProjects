@@ -1,0 +1,51 @@
+Description:
+One of my professors mentioned that a program that allocates all necessary memory up front and manages its own memory runs faster than programs that let the system manage memory. So, I wanted to put that to the test. There are three types of designs that I came up with.
+
+MemoryHeap
+This design simply allocates an array of ‘x’ number of ‘y’ object types. When the program allocates memory for that object, this heap simply allocates a specific index into this array. This design is extremely fast and efficient. However, it requires the program to know exactly how many objects of ‘y’ type are going to be used throughout runtime (it does not allocate more as needed), and there need to be different heaps for different object types. This heap does not offer flexibility.
+
+AdvancedHeap
+This design comes from a lecture from CS 240, Advanced Programming. This heap has a list of memory chunks (SubHeap) that distribute memory of different sizes. For example, it would have an array that has:
+
+[0] => memory heap that distributes 8 bytes of memory
+[1] => memory heap that distributes 16 bytes of memory
+[2] => memory heap that distributes 32 bytes of memory
+[3] => memory heap that distributes 64 bytes of memory
+[4] => memory heap that distributes 128 bytes of memory
+
+
+If the program wants to allocate 16 bytes of memory, it allocates memory from the sub-heap at index 1. If the program allocates 20 bytes of memory, the best fitting allocation comes from index 2 and gives the user 32 bytes of memory.
+
+This type of memory allows the allocation to be used for any type of object. That restriction has been removed from the previous design. However, this design has a major flaw. If the program runs out of 128 byte slots, the heap will not allocate another 128 byte request, although there may be plenty of memory. For example, two consecutive 64 byte sectors could be allocated as a single 128 byte sector. The solution to this problem, is the third design.
+
+
+BorrowHeap
+Instead of dividing the memory into 32 byte chunks or 16 byte chunks, the memory is allocated as a single chunk (for example, 512 bytes… size is relative). If the program requests a 32 byte chunk, the heap will divide itself into necessary chunks in order to needed chunks.
+
+Here’s a diagram example:
+|                  512            |
+|          256        |    256    |
+|    128    |   128   |    256    |
+|  64 |  64 |   128   |    256    |
+|32|32|  64 |   128   |    256    |
+|* |32|  64 |   128   |    256    |
+
+If the program then requests 64 bytes, there is a chunk all ready to be allocated.
+|* |32|  64 |   128   |    256    |
+|* |32|  *  |   128   |    256    |
+
+Then, when memory is freed, borrowed chunks are combined and returned to the higher level.
+
+|* |32|* |32| 64 |  * |    256    |
+|32|32|* |32| 64 |  * |    256    |
+| 64  |* |32| 64 |  * |    256    |
+
+| 64  |* |32| 64 |  * |    256    |
+| 64  |32|32| 64 |  * |    256    |
+| 64  | 64  | 64 |  * |    256    |
+|    128    | 64 |  * |    256    |
+
+This design is incredibly flexible and is dynamic to the needs of the program. One problem I have found is that this design can be a victim of memory fragmentation. Fragmentation can occur because I am giving the actual memory address of where the memory is located. A solution to memory fragmentation would  use virtual memory addressing so that memory can be relocated without ruining the program’s mapping to memory.
+
+Result:
+I found that my implementations were slightly faster than using new/delete. However, I do not feel that my tests were very rigorous. At the time, I couldn’t think of a problem that would require a lot of intermixed free and malloc calls.

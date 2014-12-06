@@ -1,0 +1,4 @@
+Description:
+In looking back on this code, I believe that there are several ways I have attempted to build the maze solver. However, the only implementation that I remember finishing for sure uses a breadth first search from the end point.
+
+The maze generator uses Random Depth First Search.

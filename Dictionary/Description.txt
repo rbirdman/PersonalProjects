@@ -1,0 +1,22 @@
+Trie Data Structure
+
+Description:
+This project was inspired by an idea that I had and had evolved by discussing my idea with a friend. I later learned that I was not the first person to come up with this idea for a data structure. The description of how a trie works can be found on Wikipedia:
+
+http://en.wikipedia.org/wiki/Trie
+
+There are several models/designs that I have for the Trie.
+
+Using sets to map to the next level (labeled as WordLevel, and my original design).
+
+Using an array to map to the next level (label as FastWordLevel).
+
+
+
+Using a combination of the two (where appropriate) in order to get relatively maximum speed and lower memory usage using a Node class. A Node chooses whether to use a WordLevel or FastWordLevel depending on how many entries that a particular node maps to. A highly dense node will use an array to take advantage of its speed, while lower concentrated nodes use a WordLevel in order to use less memory. Then there is a leaf Node class that is a singleton class. All words have a NULL character at the end. Instead of having a Node for each NULL character for each word, each word maps to the same NULL character node.
+
+
+For a better explained report, I have attached a report that I turned into one of my classes. The project started out as a personal project and ended up as a topic I could write for a report for one of my classes.
+
+Result:
+Complex… See the report Word document in the repo.

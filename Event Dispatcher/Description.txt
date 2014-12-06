@@ -1,0 +1,8 @@
+Description:
+This project was inspired by a style of programming from my Distributed Systems class. Our teacher had us use a language that he invented, krl, that uses a lot of event-based programming.
+
+I wanted to create my own dispatcher/engine that would signal events to any registered listeners. In the case of c++, the registered listeners are any static methods.
+
+To make the project a little more difficult and interesting, I decided to make the Dispatcher multithreaded. I also wanted to use the concept of a ’thread pool’ with dispatching events. I don’t want to launch 100 new threads, since that is bad for performance. If there are a certain number of threads already running, the dispatcher will wait until a process finishes before dispatching the next event.
+
+After completing the multithreaded version, I have made plans to create a distributed version of the event dispatcher. While I have not done this part of the project, I have come up with plans to use “OpenMPI” to create a distributed version.
