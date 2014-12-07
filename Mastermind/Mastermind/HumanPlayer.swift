@@ -12,4 +12,16 @@ class HumanPlayer: Player {
 	init() {
 		
 	}
+	
+	func getSecretSequence() -> GameBoard.ColorSequence {
+		return GameBoard.ColorSequence()
+	}
+	
+	func getGuess() -> GameBoard.ColorSequence {
+		return GameBoard.ColorSequence()
+	}
+	
+	func guessResult(correctPlacement:Int, incorrectPlacement:Int) {
+		
+	}
 }

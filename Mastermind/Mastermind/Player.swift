@@ -9,7 +9,11 @@
 import Foundation
 
 protocol Player {
+	func getSecretSequence() -> GameBoard.ColorSequence
 	
+//	player can keep track of guesses and results
+	func getGuess() -> GameBoard.ColorSequence
+	func guessResult(correctPlacement:Int, incorrectPlacement:Int)
 }
 
 enum PlayerType: Int {

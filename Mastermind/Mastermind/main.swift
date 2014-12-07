@@ -8,5 +8,5 @@
 
 import Foundation
 
-println("Hello, World!")
-
+var game = Mastermind()
+game.start()
