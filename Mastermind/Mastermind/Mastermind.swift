@@ -31,13 +31,22 @@ class Mastermind {
 	
 	func playRound(guesser:Player, secretChooser:Player) {
 		var boardgame = board!
-		var secret = secretChooser.getGuess()
+//		var secret = secretChooser.getGuess()
+		var secret = secretChooser.getSecretSequence()
 		boardgame.secret = secret
 		
+		boardgame.printBoard()
+		println()
+		
 		do {
-			boardgame.printBoard()
+			var guess = guesser.getGuess()
+			var result = boardgame.makeGuess(guess)
+			if let realResult = result {
+				guesser.guessResult(realResult.0, incorrectPlacement: realResult.1)
+			}
 			
-			break
+			boardgame.printBoard()
+			println()
 		} while (boardgame.mayContinue())
 	}
 }

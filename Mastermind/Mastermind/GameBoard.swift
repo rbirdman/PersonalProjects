@@ -118,7 +118,7 @@ class GameBoard {
 	}
 	
 	func mayContinue() -> Bool {
-		return guesses.count < maxGuesses && secret == guesses.last
+		return guesses.count < maxGuesses && secret! != guesses.last
 	}
 	
 	func makeGuess(guess:ColorSequence) -> (Int,Int)? {
@@ -155,7 +155,8 @@ class GameBoard {
 				println("  | \(emptyGuess  ) |  ")
 			}
 			else {
-				println("  | \(emptyGuess  ) |  ")
+				var result = guessResults[count]
+				println("  | \(guesses[count]  ) | • \(result.0) ◦ \(result.1)")
 			}
 			
 		}
@@ -170,15 +171,20 @@ class GameBoard {
 	
 }
 
-func == (left:GameBoard.ColorSequence?, right:GameBoard.ColorSequence?) -> Bool {
-	if(left == nil) {
-		return right == nil
-	}
-	else if(right == nil) {
-		return left == nil
+func == (left:GameBoard.ColorSequence, right:GameBoard.ColorSequence?) -> Bool {
+//	return left.sequence == right.sequence
+//	if(left == nil) {
+//		return right == nil
+//	}
+	if(right == nil) {
+		return false
 	}
 	else {
 //		TODO: requires testing
-		return left!.sequence == right!.sequence
+		return left.sequence == right!.sequence
 	}
+}
+
+func != (left:GameBoard.ColorSequence, right:GameBoard.ColorSequence?) -> Bool {
+	return !(left == right)
 }
