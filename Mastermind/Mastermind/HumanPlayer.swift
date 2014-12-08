@@ -34,16 +34,16 @@ class HumanPlayer: Player {
 		return sequence
 	}
 	
-	func getSecretSequence() -> GameBoard.ColorSequence {
+	func getSecretSequence(sequenceLength:Int) -> GameBoard.ColorSequence {
 		print("What is the secret sequence? ")
 		var input = readLine()
 		return lineToColorSequence(input)
 	}
 	
-	func getGuess() -> GameBoard.ColorSequence {
+	func getGuess(sequenceLength:Int) -> GameBoard.ColorSequence {
 		print("What is your guess? ")
 		var input = readLine()
-		return lineToColorSequence(input)		
+		return lineToColorSequence(input)
 //		return GameBoard.ColorSequence(pieces:GameBoard.Piece.Blue, GameBoard.Piece.Red, GameBoard.Piece.Green, GameBoard.Piece.Yellow)
 	}
 	

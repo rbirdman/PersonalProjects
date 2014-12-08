@@ -14,7 +14,8 @@ class Mastermind {
 	var board:GameBoard? = nil
 	
 	convenience init() {
-		self.init(p1: PlayerType.Human, p2: PlayerType.Human)
+//		self.init(p1: PlayerType.Human, p2: PlayerType.Human)
+		self.init(p1: PlayerType.Human, p2: PlayerType.Computer)
 	}
 	
 	init(p1:PlayerType, p2:PlayerType) {
@@ -31,15 +32,14 @@ class Mastermind {
 	
 	func playRound(guesser:Player, secretChooser:Player) {
 		var boardgame = board!
-//		var secret = secretChooser.getGuess()
-		var secret = secretChooser.getSecretSequence()
+		var secret = secretChooser.getSecretSequence(boardgame.sequenceLength)
 		boardgame.secret = secret
 		
 		boardgame.printBoard()
 		println()
 		
 		do {
-			var guess = guesser.getGuess()
+			var guess = guesser.getGuess(boardgame.sequenceLength)
 			var result = boardgame.makeGuess(guess)
 			if let realResult = result {
 				guesser.guessResult(realResult.0, incorrectPlacement: realResult.1)

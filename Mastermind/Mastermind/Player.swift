@@ -9,10 +9,10 @@
 import Foundation
 
 protocol Player {
-	func getSecretSequence() -> GameBoard.ColorSequence
+	func getSecretSequence(sequenceLength:Int) -> GameBoard.ColorSequence
 	
 //	player can keep track of guesses and results
-	func getGuess() -> GameBoard.ColorSequence
+	func getGuess(sequenceLength:Int) -> GameBoard.ColorSequence
 	func guessResult(correctPlacement:Int, incorrectPlacement:Int)
 }
 

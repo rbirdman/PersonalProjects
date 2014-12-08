@@ -22,10 +22,14 @@ extension Array {
 }
 
 class GameBoard {
-	enum Piece : Printable {
+	enum Piece : Int, Printable {
 //		Colors to choose from
 		case Red, Blue, Green, Yellow, Black, White
 		case NoColor
+		
+		static func maxValue() -> Int {
+			return Piece.White.rawValue
+		}
 		
 		var description: String {
 			switch(self) {
@@ -176,7 +180,8 @@ class GameBoard {
 		
 		println("---\(dynamicLine)---")
 		println("|  \(emptyLine  )  |")
-		println("|   \(emptyGuess )   |")
+//		println("|   \(emptyGuess )   |")
+		println("|   \(secret! )   |")
 		println("---\(dynamicLine)---")
 		
 	}

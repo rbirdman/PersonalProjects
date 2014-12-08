@@ -13,11 +13,23 @@ class ComputerPlayer: Player {
 		
 	}
 	
-	func getSecretSequence() -> GameBoard.ColorSequence {
-		return GameBoard.ColorSequence()
+	func getRandSequence(length:Int) -> GameBoard.ColorSequence {
+		var sequence = GameBoard.ColorSequence()
+		
+		for _ in 0..<length {
+			var rand = Int(arc4random()) % GameBoard.Piece.maxValue()
+			var piece = GameBoard.Piece(rawValue: rand)
+			sequence.sequence.append(piece!)
+		}
+		
+		return sequence
 	}
 	
-	func getGuess() -> GameBoard.ColorSequence {
+	func getSecretSequence(sequenceLength:Int) -> GameBoard.ColorSequence {
+		return getRandSequence(sequenceLength)
+	}
+	
+	func getGuess(sequenceLength:Int) -> GameBoard.ColorSequence {
 		return GameBoard.ColorSequence()
 	}
 	
