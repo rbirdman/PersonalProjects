@@ -38,6 +38,18 @@ class GameBoard {
 			case .NoColor:return "*"
 			}
 		}
+		
+		static func stringToPiece(val:String) -> Piece {
+			switch(val) {
+				case "R": return Piece.Red
+				case "B": return Piece.Blue
+				case "G": return Piece.Green
+				case "Y": return Piece.Yellow
+				case "K": return Piece.Black
+				case "W": return Piece.White
+				default:  return Piece.NoColor
+			}
+		}
 	}
 	
 	class ColorSequence : Printable {

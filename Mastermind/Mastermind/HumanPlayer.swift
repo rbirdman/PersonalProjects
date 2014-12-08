@@ -13,14 +13,38 @@ class HumanPlayer: Player {
 		
 	}
 	
+	func readLine() -> String {
+		var fh = NSFileHandle.fileHandleWithStandardInput()
+		
+		var str = NSString(data: fh.availableData, encoding: NSUTF8StringEncoding)
+		var str_val = String(str!)
+//		remove endline character
+		return str_val.substringToIndex(str_val.endIndex.predecessor())
+//		}
+	}
+	
+	func lineToColorSequence(line:String) -> GameBoard.ColorSequence {
+		var colors = line.componentsSeparatedByString(" ")
+		var sequence = GameBoard.ColorSequence()
+		
+		for color in colors {
+			var piece = GameBoard.Piece.stringToPiece(color)
+			sequence.sequence.append(piece)
+		}
+		return sequence
+	}
+	
 	func getSecretSequence() -> GameBoard.ColorSequence {
-		return GameBoard.ColorSequence(pieces:GameBoard.Piece.Red, GameBoard.Piece.Blue, GameBoard.Piece.Green, GameBoard.Piece.Yellow)
+		print("What is the secret sequence? ")
+		var input = readLine()
+		return lineToColorSequence(input)
 	}
 	
 	func getGuess() -> GameBoard.ColorSequence {
-//		return GameBoard.ColorSequence()
+		print("What is your guess? ")
+		var input = readLine()
+		return lineToColorSequence(input)		
 //		return GameBoard.ColorSequence(pieces:GameBoard.Piece.Blue, GameBoard.Piece.Red, GameBoard.Piece.Green, GameBoard.Piece.Yellow)
-		return GameBoard.ColorSequence(pieces:GameBoard.Piece.Black, GameBoard.Piece.Red, GameBoard.Piece.Green, GameBoard.Piece.Yellow)
 	}
 	
 	func guessResult(correctPlacement:Int, incorrectPlacement:Int) {
