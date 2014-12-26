@@ -27,6 +27,15 @@ class GameBoard {
 		case Red, Blue, Green, Yellow, Black, White
 		case NoColor
 		
+		static func randomColor() -> Piece {
+			var rand = Int(arc4random()) % (Piece.maxValue() + 1)
+			return Piece(rawValue: rand)!
+		}
+		
+		func nextColor() -> Piece? {
+			return Piece(rawValue: self.rawValue + 1)
+		}
+		
 		static func maxValue() -> Int {
 			return Piece.White.rawValue
 		}
@@ -65,6 +74,13 @@ class GameBoard {
 		
 		init(pieces:[Piece]) {
 			sequence = pieces
+		}
+		
+		init(other:ColorSequence) {
+			sequence = []
+			for val in other.sequence {
+				sequence.append(val)
+			}
 		}
 		
 //		square bracket operator
@@ -125,7 +141,7 @@ class GameBoard {
 	var secret:ColorSequence? = nil
 	
 	convenience init() {
-		self.init(width: 4, guessLimit: 10)
+		self.init(width: 4, guessLimit: 12)
 	}
 	
 	init(width:Int, guessLimit:Int) {
@@ -134,7 +150,7 @@ class GameBoard {
 	}
 	
 	func mayContinue() -> Bool {
-		return guesses.count < maxGuesses && secret! != guesses.last
+		return guesses.count < maxGuesses && !victory()
 	}
 	
 	func makeGuess(guess:ColorSequence) -> (Int,Int)? {
@@ -148,6 +164,10 @@ class GameBoard {
 			return score
 		}
 		return nil
+	}
+	
+	func victory() -> Bool {
+		return secret! == guesses.last
 	}
 	
 	func printBoard() {
@@ -189,17 +209,25 @@ class GameBoard {
 }
 
 func == (left:GameBoard.ColorSequence, right:GameBoard.ColorSequence?) -> Bool {
-//	return left.sequence == right.sequence
-//	if(left == nil) {
-//		return right == nil
-//	}
 	if(right == nil) {
 		return false
 	}
 	else {
 //		TODO: requires testing
-		return left.sequence == right!.sequence
+//		doesn't work
+//		return left.sequence == right!.sequence
+		if left.sequence.count != right!.sequence.count {
+			return false
+		}
+		else {
+			for index in (0..<left.sequence.count) {
+				if left.sequence[index] != right!.sequence[index] {
+					return false
+				}
+			}
+		}
 	}
+	return true
 }
 
 func != (left:GameBoard.ColorSequence, right:GameBoard.ColorSequence?) -> Bool {

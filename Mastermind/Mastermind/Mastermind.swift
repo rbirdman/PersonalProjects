@@ -15,7 +15,8 @@ class Mastermind {
 	
 	convenience init() {
 //		self.init(p1: PlayerType.Human, p2: PlayerType.Human)
-		self.init(p1: PlayerType.Human, p2: PlayerType.Computer)
+//		self.init(p1: PlayerType.Human, p2: PlayerType.Computer)
+		self.init(p1: PlayerType.Computer, p2: PlayerType.Computer)
 	}
 	
 	init(p1:PlayerType, p2:PlayerType) {

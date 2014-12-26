@@ -13,6 +13,7 @@
 		D94951541A34DD3D00A5429B /* HumanPlayer.swift in Sources */ = {isa = PBXBuildFile; fileRef = D94951531A34DD3D00A5429B /* HumanPlayer.swift */; };
 		D94951561A34E2D100A5429B /* ComputerPlayer.swift in Sources */ = {isa = PBXBuildFile; fileRef = D94951551A34E2D100A5429B /* ComputerPlayer.swift */; };
 		D94951581A34E33000A5429B /* GameBoard.swift in Sources */ = {isa = PBXBuildFile; fileRef = D94951571A34E33000A5429B /* GameBoard.swift */; };
+		D9A763181A396330001C4DB5 /* Combination.swift in Sources */ = {isa = PBXBuildFile; fileRef = D9A763171A396330001C4DB5 /* Combination.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXCopyFilesBuildPhase section */
@@ -35,6 +36,7 @@
 		D94951531A34DD3D00A5429B /* HumanPlayer.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = HumanPlayer.swift; sourceTree = "<group>"; };
 		D94951551A34E2D100A5429B /* ComputerPlayer.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ComputerPlayer.swift; sourceTree = "<group>"; };
 		D94951571A34E33000A5429B /* GameBoard.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = GameBoard.swift; sourceTree = "<group>"; };
+		D9A763171A396330001C4DB5 /* Combination.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Combination.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -81,6 +83,7 @@
 				D94951531A34DD3D00A5429B /* HumanPlayer.swift */,
 				D94951551A34E2D100A5429B /* ComputerPlayer.swift */,
 				D94951571A34E33000A5429B /* GameBoard.swift */,
+				D9A763171A396330001C4DB5 /* Combination.swift */,
 			);
 			name = Model;
 			sourceTree = "<group>";
@@ -147,6 +150,7 @@
 				D94951561A34E2D100A5429B /* ComputerPlayer.swift in Sources */,
 				D94951541A34DD3D00A5429B /* HumanPlayer.swift in Sources */,
 				D94951501A34DC9100A5429B /* Mastermind.swift in Sources */,
+				D9A763181A396330001C4DB5 /* Combination.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -261,6 +265,7 @@
 				D949514D1A34D9BC00A5429B /* Release */,
 			);
 			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
 		};
 /* End XCConfigurationList section */
 	};
