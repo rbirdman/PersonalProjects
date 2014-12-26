@@ -200,8 +200,14 @@ class GameBoard {
 		
 		println("---\(dynamicLine)---")
 		println("|  \(emptyLine  )  |")
-//		println("|   \(emptyGuess )   |")
-		println("|   \(secret! )   |")
+		
+		if victory() || guesses.count >= maxGuesses {
+			println("|   \(secret! )   |")
+		}
+		else {
+			println("|   \(emptyGuess )   |")
+		}
+		
 		println("---\(dynamicLine)---")
 		
 	}
