@@ -1,0 +1,34 @@
+Description:
+This project idea came from long ago when I took CS 235 (Data Structures) at BYU. As we talked about Queues, we talked about the pluses and minuses of different implementations for the different queues. This queue uses the concept of ‘Wrap Around’ in order to save time on shifting values on the pop/dequeue call.
+
+Simple Array Queue      |   Wrap Around Queue
+                      Start
+| 1 | 2 | 3 | 4 |       |   | 1 | 2 | 3 | 4 |
+                     Dequeue (1)
+| 2 | 3 | 4 |   |       |   |   | 2 | 3 | 4 |
+                     Dequeue (2)
+| 3 | 4 |   |   |       |   |   |   | 3 | 4 |
+                     Enqueue 5
+| 3 | 4 | 5 |   |       |   | 5 |   | 3 | 4 |
+                     Dequeue (3)
+| 4 | 5 |   |   |       |   | 5 |   |   | 4 |
+                     Dequeue (4)
+| 5 |   |   |   |       |   | 5 |   |   |   |
+                     Dequeue (5)
+|   |   |   |   |       |   |   |   |   |   |
+
+
+The wrap around queue uses a pointer to keep track of where the front of the queue is and a pointer of where the back/insert point is. These pointers guarantee that a pop/pop (or enqueue/dequeue) operation is constant time. Note, that there is technically extra time taken in order to grow or shrink the queue size.
+
+Application:
+For extremely large queues, this will save a lot of time. The Simple Queue has a O(n) remove operation. Which means that in order to deplete the queue, it could be O(n^2). The Wrap Around queue, has a O(1) remove operation. Which means, that in order to deplete the queue, it requires popping off each item O(n).
+
+For ArrayList:
+I believe that another application for this wrap around design is with ArrayList. A Remove(0) operation which normal takes O(n) in order to shift values over can now take O(1) by adjusting a single pointer. This will certainly affect the way that the indexing operator needs to handle the retrieval of items. But the indexing operator would simply need to account for how far the pointer has shifted, and account for overflow. Something like:
+
+… operator[](index) {
+  actual_index = (index + (head_ptr - array_ptr)) % size; //make this a macro/method
+  return array_ptr[actual_index];
+}
+
+As these are simply notes/thoughts, I haven’t checked to see if this works in practice. The concept makes sense to me and I may end up implementing this type of array list. Note, this does not optimize removing an item in the middle of an array. Values still need to be shifted so that holes aren’t in the array.
