@@ -65,7 +65,7 @@ class GameBoard {
 		}
 	}
 	
-	class ColorSequence : Printable {
+	class ColorSequence : Printable, Equatable {
 		var sequence: [Piece]
 		
 		init(pieces:Piece...) {
@@ -214,26 +214,28 @@ class GameBoard {
 	
 }
 
+func == (left:GameBoard.ColorSequence, right:GameBoard.ColorSequence) -> Bool {
+	if left.sequence.count != right.sequence.count {
+		return false
+	}
+	else {
+		for index in (0..<left.sequence.count) {
+			if left.sequence[index] != right.sequence[index] {
+				return false
+			}
+		}
+	}
+	
+	return true
+}
+
 func == (left:GameBoard.ColorSequence, right:GameBoard.ColorSequence?) -> Bool {
 	if(right == nil) {
 		return false
 	}
 	else {
-//		TODO: requires testing
-//		doesn't work
-//		return left.sequence == right!.sequence
-		if left.sequence.count != right!.sequence.count {
-			return false
-		}
-		else {
-			for index in (0..<left.sequence.count) {
-				if left.sequence[index] != right!.sequence[index] {
-					return false
-				}
-			}
-		}
+		return left == right!
 	}
-	return true
 }
 
 func != (left:GameBoard.ColorSequence, right:GameBoard.ColorSequence?) -> Bool {

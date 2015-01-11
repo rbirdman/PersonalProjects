@@ -8,11 +8,32 @@
 
 import Foundation
 
+// use to make unique permutations
+func filterUniqueValues<T: Equatable>(arr: [T]) -> [T] {
+	var subset:[T] = []
+	
+	for value in arr {
+		var exists = false
+		for subValue in subset {
+			if value == subValue {
+				exists = true
+				break
+			}
+		}
+		
+		if !exists {
+			subset.append(value)
+		}
+	}
+	
+	return subset
+}
+
 class ComputerPlayer: Player {
 	var guesses:[GameBoard.ColorSequence] = []
 	var results:[(Int,Int)] = []
 	var previousGuess = GameBoard.ColorSequence()
-	var permutations:[[GameBoard.Piece]] = []
+	var permutations:[GameBoard.ColorSequence] = []
 	var mostTotalCorrect = 0
 	
 	init() {
@@ -52,8 +73,8 @@ class ComputerPlayer: Player {
 		
 	}
 	
-	func allPermutations(data:[GameBoard.Piece], setSize:Int) -> [[GameBoard.Piece]] {
-		var temp:[[GameBoard.Piece]] = []
+	func allPermutations(data:[GameBoard.Piece], setSize:Int) -> [GameBoard.ColorSequence] {
+		var temp:[GameBoard.ColorSequence] = []
 		
 		permutationHelper(data, setSize: setSize, index: 0, collection: [], results: &temp)
 		
@@ -61,9 +82,9 @@ class ComputerPlayer: Player {
 	}
 	
 	func permutationHelper(data:[GameBoard.Piece], setSize:Int, index:Int,
-		collection:[GameBoard.Piece], inout results:[[GameBoard.Piece]]) {
+		collection:[GameBoard.Piece], inout results:[GameBoard.ColorSequence]) {
 			if collection.count == setSize {
-				results.append(collection)
+				results.append(GameBoard.ColorSequence(pieces: collection))
 			}
 			else if collection.count < setSize && index < data.count {
 				var nextCollect = collection
@@ -82,10 +103,6 @@ class ComputerPlayer: Player {
 			var prevGuess = guesses[index]
 			var result = results[index]
 			
-//			| B  B  W  G | • 3 ◦ 0
-//			| B  B  B  G | • 3 ◦ 0
-//			| B  B  W  G | • 3 ◦ 0
-//			| B  B  W  G | • 3 ◦ 0
 			if prevGuess == guess {
 				return false
 			}
@@ -113,16 +130,18 @@ class ComputerPlayer: Player {
 		var previousResults = results.last!
 		var totalColorsCorrect = previousResults.0 + previousResults.1
 		
-		if guesses.count == 1 || mostTotalCorrect <= totalColorsCorrect {
+		if mostTotalCorrect <= totalColorsCorrect {
 			var tempPermutations = allPermutations(previousGuess.sequence, setSize: totalColorsCorrect)
 			
 			if mostTotalCorrect == totalColorsCorrect {
-//				try to find cross multiply?
 				permutations += tempPermutations
+				permutations = filterUniqueValues(permutations)
 			}
 			else {
 				permutations = tempPermutations
 			}
+			
+			println("Permutations: \(permutations)")
 			
 			mostTotalCorrect = totalColorsCorrect
 		}
@@ -133,9 +152,9 @@ class ComputerPlayer: Player {
 //		shuffle permutations to show 'guessing'
 		permutations = permutations.sorted {_, _ in arc4random() % 2 == 0}
 		
-//		do by index to be able to delete permutations that cannot produce a correct anwer
+//		do by index to be able to delete permutations that cannot produce a correct answer
 		for index in 0..<permutations.count {
-			var combination = permutations[index]
+			var combination = permutations[index].sequence
 			
 //			fill combination with 'no color', if sequence is chosen, fill 'no colors' with rand color
 //			fill in possible colors (2/3 sequence -> 4 sequence)
